@@ -1,0 +1,66 @@
+:root {
+
+    --yellow: #F4E44C;
+    --brown: #AE614C;
+    --gray: #B4B4BC;
+    --red: #E02404;
+    --darkGray: #3A3737; 
+
+
+    --bg: #FAF7EC;
+    --panel: #FFFFFF;
+    --border: #E3E3E8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--darkGray);
+}
+
+header {
+    padding: 1rem 1.5rem;
+    background: var(--panel);
+    border-bottom: 4px solid var(--yellow);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.viewport {
+    overflow: hidden;
+    height: 70vh;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.side-panel section {
+    background: var(--panel);
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.side-panel h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
