@@ -64,3 +64,41 @@ header h1 {
     margin-top: 0;
     font-size: 1.1rem;
 }
+
+#venue {
+    width: max-content;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.zone {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;         
+    margin-bottom: 2rem;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.row-label {
+    width: 1.2rem;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.seat {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px 6px 3px 3px;
+    font-size: 0.65rem;
+    cursor: pointer;
+}
+
+.zone-front .seat { background: var(--brown); color: #fff; }
+.zone-back .seat  { background: #D4A395; color: var(--darkGray); }
