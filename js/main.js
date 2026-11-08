@@ -254,14 +254,17 @@ function loadCart() {
     updateCart();
 }
 
-loadCart();
+//loadCart();
 
 // How zoomed in the map is (1 stands for normal size)
 let zoomLevel = 1;
+let moveX = 0;
+let moveY = 0;
 
-// Applies the current zoom to the venue
+// Applies the current zoom to the venue and position
 function updateView() {
-    document.getElementById("venue").style.transform = "scale(" + zoomLevel + ")";
+    document.getElementById("venue").style.transform = 
+    "translate(" + moveX + "px, "+moveY +"px) scale(" + zoomLevel + ")";
 }
 // Makes the venue bigegr up to a limit
 function zoomIn() {
@@ -281,9 +284,39 @@ function zoomOut() {
 // Puts the venue back to its normal size
 function resetView() {
     zoomLevel= 1;
+    moveX = 0;
+    moveY = 0;
     updateView();
 }
 
 document.getElementById("zoom-in").addEventListener("click", zoomIn);
 document.getElementById("zoom-out").addEventListener("click", zoomOut);
 document.getElementById("reset-view").addEventListener("click", resetView);
+
+// Moves the map by the given amount, but never further than the limit
+function moveMap(changeX, changeY) {
+    moveX += changeX;
+    moveY += changeY;
+
+    if (moveX > 300) { moveX = 300; }
+    if (moveX < -300) { moveX = -300; 
+    }
+    if (moveY > 300) { moveY = 300; }
+    if (moveY < -300) { moveY = -300; }
+    updateView();
+}
+
+document.getElementById("move-left").addEventListener("click", function () {
+    moveMap(-50, 0);
+});
+document.getElementById("move-right").addEventListener("click", function () {
+    moveMap(50, 0);
+});
+document.getElementById("move-up").addEventListener("click", function () {
+    moveMap(0, -50);
+});
+document.getElementById("move-down").addEventListener("click", function () {
+    moveMap(0, 50);
+});
+
+loadCart();
