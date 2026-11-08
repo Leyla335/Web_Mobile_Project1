@@ -151,6 +151,7 @@ function addToCart() {
 
     inspectedSeat.classList.add("in-cart");
     updateAddButton();
+    updateCart();
 }
 
 // Makes the button mathc the inspected seat. Usable or already in the cart
@@ -170,3 +171,22 @@ function updateAddButton() {
 }
 
 document.getElementById("add-to-cart").addEventListener("click", addToCart);
+
+// Redraws the cart list and the total price from the cart array
+function updateCart() {
+    const list = document.getElementById("cart-items");
+    list.innerHTML = "";
+
+    let total = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        const item = document.createElement("li");
+        item.textContent = cart[i].sectionName + ", row " + cart[i].row +
+            ", seat " + cart[i].number + " - " + cart[i].price + " " + VENUE.currency;
+        list.appendChild(item);
+
+        total += Number(cart[i].price);
+    }
+
+    document.getElementById("cart-total").textContent = total;
+}
