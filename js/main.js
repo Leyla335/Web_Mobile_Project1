@@ -18,6 +18,12 @@ function createSeat(section, row, number) {
         "aria-label",
         `${section.name}, row ${row}, seat ${number}, ${section.price} ${VENUE.currency}`
     );
+
+    if (VENUE.unavailable.includes(seat.dataset.id)) {
+        seat.classList.add("unavailable");
+        seat.disabled = true;
+        seat.setAttribute("aria-label", seat.getAttribute("aria-label") + ", unavailable");
+    }
     return seat;
 }
 
@@ -52,6 +58,11 @@ function renderVenue() {
     const venueEl = document.getElementById("venue");
     venueEl.innerHTML = "";
 
+    const stage = document.createElement("div");
+    stage.className = "stage";
+    stage.textContent = "STAGE";
+    venueEl.appendChild(stage);
+
     // Create the front zone first, followed by the back zone
     ["front", "back"].forEach(function (zoneName) {
         const zoneEl = document.createElement("div");
@@ -66,3 +77,25 @@ function renderVenue() {
 }
 // Renders the venue layout when the script runs
 renderVenue();
+
+// Shows the color guide under the map that include seat colors with their prices
+function showColorGuide() {
+    const guideEl = document.getElementById("color-guide");
+    guideEl.innerHTML = "";
+
+    const items = [
+        { cls: "zone-front", label: "Front: 20 " + VENUE.currency },
+        { cls: "zone-back", label: "Back: 15 " + VENUE.currency },
+        { cls: "unavailable", label: "Unavailable" }
+    ];
+
+    items.forEach(function (item) {
+        const li = document.createElement("li");
+        const colorBox = document.createElement("span");
+        colorBox.className = "color-box " + item.cls;
+        li.appendChild(colorBox);
+        li.appendChild(document.createTextNode(item.label));
+        guideEl.appendChild(li);
+    });
+}
+showColorGuide();

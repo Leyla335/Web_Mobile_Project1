@@ -5,7 +5,7 @@
     --gray: #B4B4BC;
     --red: #E02404;
     --darkGray: #3A3737; 
-
+    --lightBrown: #D4A395;
 
     --bg: #FAF7EC;
     --panel: #FFFFFF;
@@ -100,5 +100,43 @@ header h1 {
     cursor: pointer;
 }
 
-.zone-front .seat { background: var(--brown); color: #fff; }
-.zone-back .seat  { background: #D4A395; color: var(--darkGray); }
+.zone-front .seat, .color-box.zone-front { background: var(--brown); color: #fff; }
+.zone-back .seat,  .color-box.zone-back  { background: var(--lightBrown); color: var(--darkGray); }
+
+.seat.unavailable,
+.color-box.unavailable {
+    background: var(--gray);
+    color: #8a8a92;
+    cursor: not-allowed;
+}
+
+.color-guide {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin: 0.8rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.85rem;
+}
+
+.color-guide li { display: flex; align-items: center; gap: 0.4rem; }
+
+.color-box {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.stage {
+    width: 60%;
+    margin: 0 auto 2rem;
+    padding: 0.6rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    background: var(--darkGray);
+    color: #fff;
+    border-radius: 0 0 50px 50px;
+}
