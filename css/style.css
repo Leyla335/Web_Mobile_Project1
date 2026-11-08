@@ -222,3 +222,21 @@ header h1 {
 #venue {
     transform-origin: top center;
 }
+
+@media (max-width: 800px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .viewport {
+        height: 55vh;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+    }
+
+    header h1 {
+        font-size: 1rem;
+    }
+}
