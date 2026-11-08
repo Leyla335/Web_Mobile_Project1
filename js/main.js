@@ -122,7 +122,51 @@ function showSeatDetails(seat) {
     document.getElementById("detail-row").textContent = seat.dataset.row;
     document.getElementById("detail-number").textContent = seat.dataset.number;
     document.getElementById("detail-price").textContent = seat.dataset.price + " " + VENUE.currency;
+    updateAddButton();
 }
 
-// Remembers which seat is currently being inspected
+// Remembers which seat is currenlty being inspected
 let inspectedSeat = null;
+
+// The tickets that the user has added already
+let cart = [];
+
+// Adds the inspected seat to the cart when the button is pressed
+function addToCart() {
+    if (inspectedSeat === null) {
+        return;
+    }
+    // makes sure that the seat that is already in the cart cannot be added again
+    if (inspectedSeat.classList.contains("in-cart")) {
+        return;
+    }
+
+    cart.push({
+        id: inspectedSeat.dataset.id,
+        sectionName: inspectedSeat.dataset.sectionName,
+            row: inspectedSeat.dataset.row,
+        number: inspectedSeat.dataset.number,
+        price: inspectedSeat.dataset.price
+    });
+
+    inspectedSeat.classList.add("in-cart");
+    updateAddButton();
+}
+
+// Makes the button mathc the inspected seat. Usable or already in the cart
+function updateAddButton() {
+    const button = document.getElementById("add-to-cart");
+
+    if (inspectedSeat === null) {
+        button.disabled = true;
+    } else if (inspectedSeat.classList.contains("in-cart")) {
+        button.disabled = true;
+        button.textContent = "ALREADY IN CART";
+    } else {
+        button.disabled = false;
+        button.textContent = "ADD TO CART";
+    
+    }
+}
+
+document.getElementById("add-to-cart").addEventListener("click", addToCart);

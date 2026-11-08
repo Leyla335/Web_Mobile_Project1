@@ -146,3 +146,8 @@ header h1 {
     color: var(--darkGray);
     outline: 1px solid var(--darkGray);
 }
+
+.seat.in-cart {
+    background: var(--red);
+    color: #fff;
+}
