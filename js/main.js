@@ -109,8 +109,20 @@ showColorGuide();
 
 // Shows the details of the clicked seat in the side panel
 function showSeatDetails(seat) {
+        // Removes the yellow from the previous seat
+    if (inspectedSeat !== null) {
+        inspectedSeat.classList.remove("inspected");
+    }
+
+    // Makes the new seat yellow and remembers it
+    seat.classList.add("inspected");
+    inspectedSeat = seat;
+
     document.getElementById("detail-section").textContent = seat.dataset.sectionName;
     document.getElementById("detail-row").textContent = seat.dataset.row;
     document.getElementById("detail-number").textContent = seat.dataset.number;
     document.getElementById("detail-price").textContent = seat.dataset.price + " " + VENUE.currency;
 }
+
+// Remembers which seat is currently being inspected
+let inspectedSeat = null;

@@ -140,3 +140,9 @@ header h1 {
     color: #fff;
     border-radius: 0 0 50px 50px;
 }
+
+.seat.inspected {
+    background: var(--yellow);
+    color: var(--darkGray);
+    outline: 1px solid var(--darkGray);
+}
