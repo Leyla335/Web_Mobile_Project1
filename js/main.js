@@ -12,6 +12,7 @@ function createSeat(section, row, number) {
     seat.dataset.row = row;
     seat.dataset.number = number;
     seat.dataset.price = section.price;
+    seat.dataset.sectionName = section.name;
 
     // Gives an accessible label of the seat for screen readers
     seat.setAttribute(
@@ -24,6 +25,12 @@ function createSeat(section, row, number) {
         seat.disabled = true;
         seat.setAttribute("aria-label", seat.getAttribute("aria-label") + ", unavailable");
     }
+    
+    // When this seat is clicked, show its details
+    seat.addEventListener("click", function () {
+        showSeatDetails(seat);
+    });
+
     return seat;
 }
 
@@ -99,3 +106,11 @@ function showColorGuide() {
     });
 }
 showColorGuide();
+
+// Shows the details of the clicked seat in the side panel
+function showSeatDetails(seat) {
+    document.getElementById("detail-section").textContent = seat.dataset.sectionName;
+    document.getElementById("detail-row").textContent = seat.dataset.row;
+    document.getElementById("detail-number").textContent = seat.dataset.number;
+    document.getElementById("detail-price").textContent = seat.dataset.price + " " + VENUE.currency;
+}
