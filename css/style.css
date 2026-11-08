@@ -6,6 +6,7 @@
     --red: #E02404;
     --darkGray: #3A3737; 
     --lightBrown: #D4A395;
+    --darkYellow: #D9C93A;
 
     --bg: #FAF7EC;
     --panel: #FFFFFF;
@@ -150,4 +151,27 @@ header h1 {
 .seat.in-cart {
     background: var(--red);
     color: #fff;
+}
+
+#add-to-cart {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--yellow);
+    color: var(--darkGray);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#add-to-cart:hover {
+    background: var(--darkYellow);
+}
+
+#add-to-cart:disabled {
+    background: var(--gray);
+    color: #8a8a92;
+    cursor: not-allowed;
 }
