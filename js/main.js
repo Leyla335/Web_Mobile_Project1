@@ -183,10 +183,44 @@ function updateCart() {
         const item = document.createElement("li");
         item.textContent = cart[i].sectionName + ", row " + cart[i].row +
             ", seat " + cart[i].number + " - " + cart[i].price + " " + VENUE.currency;
+
+        // Each ticket will get its own remove button
+        const seatId = cart[i].id;
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.className = "remove-button";
+        removeButton.textContent = "REMOVE";
+        removeButton.addEventListener("click", function () {
+            removeFromCart(seatId);
+        });
+
+        item.appendChild(removeButton);
         list.appendChild(item);
 
         total += Number(cart[i].price);
     }
 
     document.getElementById("cart-total").textContent = total;
+}
+
+// Removes a ticket from the cart and returns its seat to normal on the map
+function removeFromCart(seatId) {
+    // Takes the ticket out of the cart list
+    for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === seatId) {
+            cart.splice(i, 1);
+            break;
+        }
+    }
+
+    // finds the matching seat on the map and removes its red in-cart look
+    const seats = document.querySelectorAll(".seat");
+    for (let i = 0; i < seats.length; i++) {
+        if (seats[i].dataset.id === seatId) {
+            seats[i].classList.remove("in-cart");
+        }
+    }
+
+    updateCart();
+    updateAddButton();
 }
