@@ -152,6 +152,7 @@ function addToCart() {
     inspectedSeat.classList.add("in-cart");
     updateAddButton();
     updateCart();
+    saveCart();
 }
 
 // Makes the button mathc the inspected seat. Usable or already in the cart
@@ -222,5 +223,36 @@ function removeFromCart(seatId) {
     }
 
     updateCart();
+    saveCart();
     updateAddButton();
 }
+
+// Ssaves the cart in the browser so it survves a refresh
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Loads the saved cart after a refresh and shows it again on the page
+function loadCart() {
+    const saved = localStorage.getItem("cart");
+
+    // case when nothing was saved yet, so there is nothing to restore
+    if (saved === null) {
+        return;
+    }
+
+    cart = JSON.parse(saved);
+
+    // Turns the seats in the cart red again on the map
+    const seats = document.querySelectorAll(".seat");
+    for (let i = 0; i < cart.length; i++) {
+        for (let j = 0; j < seats.length; j++) {
+            if (seats[j].dataset.id === cart[i].id) {
+            seats[j].classList.add("in-cart");
+            }
+        }
+    }
+    updateCart();
+}
+
+loadCart();
