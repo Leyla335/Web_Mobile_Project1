@@ -240,7 +240,6 @@ function loadCart() {
     if (saved === null) {
         return;
     }
-
     cart = JSON.parse(saved);
 
     // Turns the seats in the cart red again on the map
@@ -256,3 +255,35 @@ function loadCart() {
 }
 
 loadCart();
+
+// How zoomed in the map is (1 stands for normal size)
+let zoomLevel = 1;
+
+// Applies the current zoom to the venue
+function updateView() {
+    document.getElementById("venue").style.transform = "scale(" + zoomLevel + ")";
+}
+// Makes the venue bigegr up to a limit
+function zoomIn() {
+    if (zoomLevel < 2) {
+        zoomLevel += 0.25;
+        updateView();}
+}
+
+// Makes the venue smaller down to a limit
+function zoomOut() {
+    if (zoomLevel > 0.5) {
+        zoomLevel -= 0.25;
+        updateView();
+    }
+}
+
+// Puts the venue back to its normal size
+function resetView() {
+    zoomLevel= 1;
+    updateView();
+}
+
+document.getElementById("zoom-in").addEventListener("click", zoomIn);
+document.getElementById("zoom-out").addEventListener("click", zoomOut);
+document.getElementById("reset-view").addEventListener("click", resetView);
